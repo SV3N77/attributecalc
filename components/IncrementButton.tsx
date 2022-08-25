@@ -7,8 +7,9 @@ export default function IncrementButton({
 }: IncrementButtonProps) {
   return (
     <button
-      className="border border-yellow-300 p-1 text-yellow-300"
+      className="border border-yellow-300 p-1 text-yellow-300 disabled:pointer-events-none disabled:opacity-50"
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>
