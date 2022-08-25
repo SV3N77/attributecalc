@@ -17,8 +17,6 @@ type PlayerStats = {
 
 const Home: NextPage = () => {
   const [characters, setCharacters] = useState<PlayerCards[]>();
-  const [decrementDisabled, setDecrementDisabled] = useState<boolean>(true);
-  const [incrementDisabled, setIncrementDisabled] = useState<boolean>(false);
   const [playerCard, setPlayerCard] = useState<PlayerCards>({
     class: "wretch",
     level: 1,
@@ -46,25 +44,14 @@ const Home: NextPage = () => {
   }, []);
 
   function decrementStat(name: keyof PlayerStats) {
-    if (playerStats[name] === playerCard.playerStats[name]) {
-      setDecrementDisabled(true);
-    } else {
-      setIncrementDisabled(false);
-      setPlayerStats((prev) => {
-        return { ...prev, [name]: prev[name] - 1 };
-      });
-      console.log(playerStats[name]);
-    }
+    setPlayerStats((prev) => {
+      return { ...prev, [name]: prev[name] - 1 };
+    });
   }
   function incrementStat(name: keyof PlayerStats) {
-    if (playerStats[name] === 99) {
-      setIncrementDisabled(true);
-    } else {
-      setDecrementDisabled(false);
-      setPlayerStats((prev) => {
-        return { ...prev, [name]: prev[name] + 1 };
-      });
-    }
+    setPlayerStats((prev) => {
+      return { ...prev, [name]: prev[name] + 1 };
+    });
   }
 
   function decrementClass(nameClass: string) {
@@ -75,6 +62,7 @@ const Home: NextPage = () => {
         }
       );
       setPlayerCard(characters[currentClass - 1]);
+      setPlayerStats(playerCard.playerStats);
       console.log(playerCard);
     }
   }
@@ -87,6 +75,7 @@ const Home: NextPage = () => {
         }
       );
       setPlayerCard(characters[currentClass + 1]);
+      setPlayerStats(playerCard.playerStats);
       console.log(playerCard);
     }
   }
@@ -113,7 +102,9 @@ const Home: NextPage = () => {
                 />
               </svg>
             </IncrementButton>
-            <div className="text-2xl text-white">{playerCard.class}</div>
+            <div className="text-2xl capitalize text-white">
+              {playerCard.class}
+            </div>
             <IncrementButton onClick={() => incrementClass(playerCard.class)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -149,10 +140,9 @@ const Home: NextPage = () => {
                 key={name}
                 name={name as keyof PlayerStats}
                 value={value}
+                limit={playerCard.playerStats[name as keyof PlayerStats]}
                 onDecrement={() => decrementStat(name as keyof PlayerStats)}
                 onIncrement={() => incrementStat(name as keyof PlayerStats)}
-                decrementDisabled={decrementDisabled}
-                incrementDisabled={incrementDisabled}
               />
             ))}
           </div>
@@ -169,25 +159,17 @@ export default Home;
 type StatProps = {
   name: keyof PlayerStats;
   value: number;
+  limit: number;
   onDecrement: () => void;
   onIncrement: () => void;
-  decrementDisabled: boolean;
-  incrementDisabled: boolean;
 };
 
-function Stat({
-  name,
-  value,
-  onDecrement,
-  onIncrement,
-  decrementDisabled,
-  incrementDisabled,
-}: StatProps) {
+function Stat({ name, value, limit, onDecrement, onIncrement }: StatProps) {
   return (
     <div className="flex justify-between gap-4">
       <div className="capitalize text-white">{name}</div>
       <div className="flex gap-2 ">
-        <IncrementButton onClick={onDecrement} disabled={decrementDisabled}>
+        <IncrementButton disabled={value <= limit} onClick={onDecrement}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-4 w-4"
@@ -200,7 +182,7 @@ function Stat({
           </svg>
         </IncrementButton>
         <div className="w-6 text-center text-white">{value}</div>
-        <IncrementButton onClick={onIncrement} disabled={incrementDisabled}>
+        <IncrementButton disabled={value >= 99} onClick={onIncrement}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-4 w-4"
