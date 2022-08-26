@@ -1,8 +1,9 @@
-import type { NextPage } from "next";
+import type { InferGetStaticPropsType, NextPage } from "next";
 import Image from "next/future/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import IncrementButton from "../components/IncrementButton";
-import { PlayerCards } from "./api/characters";
+import path from "path";
+import fs from "fs";
 
 type PlayerStats = {
   vigor: number;
@@ -15,9 +16,29 @@ type PlayerStats = {
   arcane: number;
 };
 
-const Home: NextPage = () => {
-  const [characters, setCharacters] = useState<PlayerCards[]>();
-  const [playerCard, setPlayerCard] = useState<PlayerCards>({
+type PlayerCard = {
+  class: string;
+  level: number;
+  playerStats: PlayerStats;
+};
+
+export async function getStaticProps() {
+  const jsonDirectory = path.join(process.cwd(), "json");
+  const jsonFiles = await fs.readFileSync(
+    jsonDirectory + "/characters.json",
+    "utf8"
+  );
+  const data = JSON.parse(jsonFiles) as { [key: string]: PlayerCard };
+
+  return {
+    props: {
+      characters: data,
+    },
+  };
+}
+
+function Home({ characters }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [playerCard, setPlayerCard] = useState<PlayerCard>({
     class: "wretch",
     level: 1,
     playerStats: {
@@ -34,14 +55,6 @@ const Home: NextPage = () => {
   const [playerStats, setPlayerStats] = useState<PlayerStats>(
     playerCard.playerStats
   );
-  useEffect(() => {
-    async function fetchCharacters() {
-      const res = await fetch("http://localhost:3000/api/characters");
-      const data = await res.json();
-      setCharacters({ ...data });
-    }
-    fetchCharacters();
-  }, []);
 
   function decrementStat(name: keyof PlayerStats) {
     setPlayerStats((prev) => {
@@ -54,30 +67,28 @@ const Home: NextPage = () => {
     });
   }
 
-  function decrementClass(nameClass: string) {
-    if (characters) {
-      const currentClass = Object.entries(characters).findIndex(
-        ([index, character]) => {
-          return character.class === nameClass;
-        }
-      );
-      setPlayerCard(characters[currentClass - 1]);
-      setPlayerStats(playerCard.playerStats);
-      console.log(playerCard);
-    }
+  function decrementClass() {
+    const currentClass = Object.keys(characters).findIndex(
+      (className) => className === playerCard.class
+    );
+    const charactersArray = Object.values(characters);
+    const prevClass = charactersArray.at(
+      (currentClass - 1) % charactersArray.length
+    )!;
+    setPlayerCard(prevClass);
+    setPlayerStats(prevClass.playerStats);
   }
 
-  function incrementClass(nameClass: string) {
-    if (characters) {
-      const currentClass = Object.entries(characters).findIndex(
-        ([index, character]) => {
-          return character.class === nameClass;
-        }
-      );
-      setPlayerCard(characters[currentClass + 1]);
-      setPlayerStats(playerCard.playerStats);
-      console.log(playerCard);
-    }
+  function incrementClass() {
+    const currentClass = Object.keys(characters).findIndex(
+      (className) => className === playerCard.class
+    );
+    const charactersArray = Object.values(characters);
+    const nextClass = charactersArray.at(
+      (currentClass + 1) % charactersArray.length
+    )!;
+    setPlayerCard(nextClass);
+    setPlayerStats(nextClass.playerStats);
   }
 
   return (
@@ -86,7 +97,7 @@ const Home: NextPage = () => {
         {/* Player Class */}
         <div className="flex flex-col items-center gap-4">
           <div className="flex w-full justify-between gap-4 px-4">
-            <IncrementButton onClick={() => decrementClass(playerCard.class)}>
+            <IncrementButton onClick={() => decrementClass()}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -105,7 +116,7 @@ const Home: NextPage = () => {
             <div className="text-2xl capitalize text-white">
               {playerCard.class}
             </div>
-            <IncrementButton onClick={() => incrementClass(playerCard.class)}>
+            <IncrementButton onClick={() => incrementClass()}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -124,7 +135,7 @@ const Home: NextPage = () => {
           </div>
           <Image
             className="aspect-[3/4]"
-            src="/images/wretch.webp"
+            src={`/images/${playerCard.class}.webp`}
             alt="Samurai"
             width={450}
             height={600}
@@ -150,7 +161,7 @@ const Home: NextPage = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Home;
 

@@ -1,5 +1,5 @@
-[
-  {
+{
+  "wretch": {
     "class": "wretch",
     "level": 1,
     "playerStats": {
@@ -13,7 +13,7 @@
       "arcane": 10
     }
   },
-  {
+  "hero": {
     "class": "hero",
     "level": 7,
     "playerStats": {
@@ -27,7 +27,7 @@
       "arcane": 11
     }
   },
-  {
+  "bandit": {
     "class": "bandit",
     "level": 5,
     "playerStats": {
@@ -40,5 +40,61 @@
       "faith": 8,
       "arcane": 14
     }
+  },
+  "astrologer": {
+    "class": "astrologer",
+    "level": 6,
+    "playerStats": {
+      "vigor": 9,
+      "mind": 15,
+      "endurance": 9,
+      "strength": 8,
+      "dexterity": 12,
+      "intelligence": 16,
+      "faith": 7,
+      "arcane": 9
+    }
+  },
+  "warrior": {
+    "class": "warrior",
+    "level": 8,
+    "playerStats": {
+      "vigor": 11,
+      "mind": 12,
+      "endurance": 11,
+      "strength": 16,
+      "dexterity": 10,
+      "intelligence": 10,
+      "faith": 8,
+      "arcane": 9
+    }
+  },
+  "prisoner": {
+    "class": "prisoner",
+    "level": 9,
+    "playerStats": {
+      "vigor": 11,
+      "mind": 12,
+      "endurance": 11,
+      "strength": 11,
+      "dexterity": 14,
+      "intelligence": 14,
+      "faith": 6,
+      "arcane": 9
+    }
+  },
+  "samurai": {
+    "class": "samurai",
+    "level": 9,
+    "playerStats": {
+      "vigor": 11,
+      "mind": 12,
+      "endurance": 11,
+      "strength": 11,
+      "dexterity": 14,
+      "intelligence": 14,
+      "faith": 6,
+      "arcane": 9
+    }
   }
-]
+}
