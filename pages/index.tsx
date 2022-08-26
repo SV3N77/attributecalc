@@ -60,10 +60,17 @@ function Home({ characters }: InferGetStaticPropsType<typeof getStaticProps>) {
     setPlayerStats((prev) => {
       return { ...prev, [name]: prev[name] - 1 };
     });
+    setPlayerCard((prev) => {
+      return { ...prev, level: prev.level - 1 };
+    });
   }
+
   function incrementStat(name: keyof PlayerStats) {
     setPlayerStats((prev) => {
       return { ...prev, [name]: prev[name] + 1 };
+    });
+    setPlayerCard((prev) => {
+      return { ...prev, level: prev.level + 1 };
     });
   }
 
