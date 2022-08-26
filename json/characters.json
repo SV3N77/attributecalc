@@ -1,18 +1,4 @@
 {
-  "wretch": {
-    "class": "wretch",
-    "level": 1,
-    "playerStats": {
-      "vigor": 10,
-      "mind": 10,
-      "endurance": 10,
-      "strength": 10,
-      "dexterity": 10,
-      "intelligence": 10,
-      "faith": 10,
-      "arcane": 10
-    }
-  },
   "hero": {
     "class": "hero",
     "level": 7,
@@ -83,18 +69,74 @@
       "arcane": 9
     }
   },
+  "confessor": {
+    "class": "confessor",
+    "level": 10,
+    "playerStats": {
+      "vigor": 10,
+      "mind": 13,
+      "endurance": 10,
+      "strength": 12,
+      "dexterity": 12,
+      "intelligence": 9,
+      "faith": 14,
+      "arcane": 9
+    }
+  },
+  "wretch": {
+    "class": "wretch",
+    "level": 1,
+    "playerStats": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 10,
+      "dexterity": 10,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    }
+  },
+  "vagabond": {
+    "class": "vagabond",
+    "level": 9,
+    "playerStats": {
+      "vigor": 15,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 14,
+      "dexterity": 13,
+      "intelligence": 9,
+      "faith": 9,
+      "arcane": 7
+    }
+  },
+  "prophet": {
+    "class": "prophet",
+    "level": 7,
+    "playerStats": {
+      "vigor": 10,
+      "mind": 14,
+      "endurance": 8,
+      "strength": 11,
+      "dexterity": 10,
+      "intelligence": 7,
+      "faith": 16,
+      "arcane": 10
+    }
+  },
   "samurai": {
     "class": "samurai",
     "level": 9,
     "playerStats": {
-      "vigor": 11,
-      "mind": 12,
-      "endurance": 11,
-      "strength": 11,
-      "dexterity": 14,
-      "intelligence": 14,
-      "faith": 6,
-      "arcane": 9
+      "vigor": 12,
+      "mind": 11,
+      "endurance": 13,
+      "strength": 12,
+      "dexterity": 15,
+      "intelligence": 9,
+      "faith": 8,
+      "arcane": 8
     }
   }
 }
