@@ -11,6 +11,14 @@
       "intelligence": 7,
       "faith": 8,
       "arcane": 11
+    },
+    "generalStats": {
+      "hp": 499,
+      "fp": 75,
+      "stamina": 99,
+      "equip load": 51.4,
+      "poise": 0,
+      "discovery": 111
     }
   },
   "bandit": {
@@ -25,6 +33,14 @@
       "intelligence": 9,
       "faith": 8,
       "arcane": 14
+    },
+    "generalStats": {
+      "hp": 414,
+      "fp": 82,
+      "stamina": 96,
+      "equip load": 48.2,
+      "poise": 0,
+      "discovery": 114
     }
   },
   "astrologer": {
@@ -39,6 +55,14 @@
       "intelligence": 16,
       "faith": 7,
       "arcane": 9
+    },
+    "generalStats": {
+      "hp": 396,
+      "fp": 95,
+      "stamina": 95,
+      "equip load": 46.6,
+      "poise": 0,
+      "discovery": 109
     }
   },
   "warrior": {
@@ -53,6 +77,14 @@
       "intelligence": 10,
       "faith": 8,
       "arcane": 9
+    },
+    "generalStats": {
+      "hp": 434,
+      "fp": 85,
+      "stamina": 97,
+      "equip load": 49.8,
+      "poise": 0,
+      "discovery": 109
     }
   },
   "prisoner": {
@@ -67,6 +99,14 @@
       "intelligence": 14,
       "faith": 6,
       "arcane": 9
+    },
+    "generalStats": {
+      "hp": 434,
+      "fp": 85,
+      "stamina": 97,
+      "equip load": 49.8,
+      "poise": 0,
+      "discovery": 109
     }
   },
   "confessor": {
@@ -81,6 +121,14 @@
       "intelligence": 9,
       "faith": 14,
       "arcane": 9
+    },
+    "generalStats": {
+      "hp": 414,
+      "fp": 88,
+      "stamina": 96,
+      "equip load": 48.2,
+      "poise": 0,
+      "discovery": 109
     }
   },
   "wretch": {
@@ -95,6 +143,14 @@
       "intelligence": 10,
       "faith": 10,
       "arcane": 10
+    },
+    "generalStats": {
+      "hp": 414,
+      "fp": 78,
+      "stamina": 96,
+      "equip load": 48.2,
+      "poise": 0,
+      "discovery": 110
     }
   },
   "vagabond": {
@@ -109,6 +165,14 @@
       "intelligence": 9,
       "faith": 9,
       "arcane": 7
+    },
+    "generalStats": {
+      "hp": 522,
+      "fp": 78,
+      "stamina": 97,
+      "equip load": 49.8,
+      "poise": 0,
+      "discovery": 107
     }
   },
   "prophet": {
@@ -123,6 +187,14 @@
       "intelligence": 7,
       "faith": 16,
       "arcane": 10
+    },
+    "generalStats": {
+      "hp": 414,
+      "fp": 91,
+      "stamina": 92,
+      "equip load": 45,
+      "poise": 0,
+      "discovery": 110
     }
   },
   "samurai": {
@@ -137,6 +209,14 @@
       "intelligence": 9,
       "faith": 8,
       "arcane": 8
+    },
+    "generalStats": {
+      "hp": 455,
+      "fp": 82,
+      "stamina": 101,
+      "equip load": 52.9,
+      "poise": 0,
+      "discovery": 108
     }
   }
 }
