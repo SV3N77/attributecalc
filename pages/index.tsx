@@ -32,6 +32,13 @@ type PlayerCard = {
   playerStats: PlayerStats;
   generalStats: GeneralStats;
 };
+// runes type
+type Runes = {
+  runes: number;
+  increase: number;
+  total: number;
+};
+
 // get data from characters.json file in json folder
 export async function getStaticProps() {
   const jsonDirectory = path.join(process.cwd(), "json");
@@ -76,7 +83,7 @@ function Home({ characters }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [generalStats, setGeneralStats] = useState<GeneralStats>(
     playerCard.generalStats
   );
-  const [runes, setRunes] = useState(LEVEL_RUNES_MAP[1]);
+  const [runes, setRunes] = useState<Runes>(LEVEL_RUNES_MAP[1]);
 
   function decrementStat(name: keyof PlayerStats) {
     // decrement each stat seperately
@@ -92,8 +99,8 @@ function Home({ characters }: InferGetStaticPropsType<typeof getStaticProps>) {
       (index) => index === playerCard.level.toString()
     );
     const runeArray = Object.values(LEVEL_RUNES_MAP);
-    const nextRune = runeArray.at(currentRune - 1)!;
-    setRunes(nextRune);
+    const prevRune = runeArray.at(currentRune - 1)!;
+    setRunes(prevRune);
     // check for stat name to decrement over maps for each general stat
     if (name === "vigor") {
       setGeneralStats((prev) => {
@@ -133,6 +140,7 @@ function Home({ characters }: InferGetStaticPropsType<typeof getStaticProps>) {
     );
     const runeArray = Object.values(LEVEL_RUNES_MAP);
     const nextRune = runeArray.at(currentRune + 1)!;
+
     setRunes(nextRune);
 
     // check for stat name to increment over maps for each general stat
@@ -336,7 +344,7 @@ const LEVEL_EQUIP_LOAD_MAP = [
   155.9, 156.9, 157.9, 159.0, 160.0,
 ];
 const LEVEL_RUNES_MAP = {
-  "1": { runes: 673, increase: null, total: 0 },
+  "1": { runes: 673, increase: 0, total: 0 },
   "2": { runes: 689, increase: 16, total: 673 },
   "3": { runes: 706, increase: 17, total: 1_362 },
   "4": { runes: 723, increase: 17, total: 2_068 },
@@ -1048,7 +1056,7 @@ const LEVEL_RUNES_MAP = {
   "710": { runes: 8_809_589, increase: 34_742, total: 1_666_033_482 },
   "711": { runes: 8_844_423, increase: 34_834, total: 1_674_843_071 },
   "712": { runes: 8_879_348, increase: 34_925, total: 1_683_687_494 },
-  "713": { runes: null, increase: null, total: 1_692_566_842 },
+  "713": { runes: 0, increase: 0, total: 1_692_566_842 },
 };
 // set type of props to pass in Stat function
 type StatProps = {
