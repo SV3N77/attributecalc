@@ -86,7 +86,7 @@ function Home({ characters }: InferGetStaticPropsType<typeof getStaticProps>) {
     setPlayerCard((prev) => {
       return { ...prev, level: prev.level - 1 };
     });
-
+    // check for stat name to decrement over maps for each general stat
     if (name === "vigor") {
       setGeneralStats((prev) => {
         return { ...prev, hp: LEVEL_HP_MAP[playerStats.vigor - 1] };
@@ -119,7 +119,7 @@ function Home({ characters }: InferGetStaticPropsType<typeof getStaticProps>) {
     setPlayerCard((prev) => {
       return { ...prev, level: prev.level + 1 };
     });
-
+    // check for stat name to increment over maps for each general stat
     if (name === "vigor") {
       setGeneralStats((prev) => {
         return { ...prev, hp: LEVEL_HP_MAP[playerStats.vigor + 1] };
@@ -179,9 +179,9 @@ function Home({ characters }: InferGetStaticPropsType<typeof getStaticProps>) {
 
   return (
     <div className="flex flex-col items-center py-10">
-      <div className="flex gap-10 border border-yellow-500 bg-neutral-700 p-5">
+      <div className="flex bg-neutral-800">
         {/* Player Class */}
-        <div className="flex flex-col items-center gap-4 pt-2">
+        <div className="flex flex-col items-center gap-4 border border-yellow-500 p-5 pt-5">
           <div className="flex w-full justify-between gap-4 px-4">
             <IncrementButton onClick={() => decrementClass()}>
               <svg
@@ -229,11 +229,11 @@ function Home({ characters }: InferGetStaticPropsType<typeof getStaticProps>) {
           />
         </div>
         {/* Player Stats */}
-        <section className="flex flex-col gap-3">
-          <div className="py-3 text-xl uppercase text-white">
+        <section className="flex flex-col gap-3 border-y border-yellow-500 p-5">
+          <div className="pb-3 text-xl uppercase text-white">
             Level: {playerCard.level}
           </div>
-          <div className=" pb-4 text-xl uppercase text-white">Stats</div>
+          <div className="text-xl uppercase text-white">Stats</div>
           <div className="flex flex-col gap-4">
             {Object.entries(playerStats).map(([name, value]) => (
               <Stat
@@ -248,12 +248,15 @@ function Home({ characters }: InferGetStaticPropsType<typeof getStaticProps>) {
           </div>
         </section>
         {/* Genreal stats */}
-        <section className="flex flex-col gap-4 py-16 px-2 text-white">
+        <section className="flex flex-col border-y border-r border-yellow-500 px-4 pt-28 text-white">
           <div className="flex flex-col gap-2">
             {Object.entries(generalStats).map(([name, value]) => (
-              <div key={name} className=" flex w-32 justify-between uppercase">
+              <div
+                key={name}
+                className="flex w-40 justify-between text-sm uppercase"
+              >
                 <div>{name}</div>
-                <div> {value} </div>
+                <div>{value}</div>
               </div>
             ))}
           </div>
@@ -320,9 +323,9 @@ type StatProps = {
 
 function Stat({ name, value, limit, onDecrement, onIncrement }: StatProps) {
   return (
-    <div className="flex justify-between gap-4">
+    <div className="flex justify-between gap-4 text-sm">
       <div className="uppercase text-white">{name}</div>
-      <div className="flex gap-2 ">
+      <div className="flex gap-2">
         <IncrementButton disabled={value <= limit} onClick={onDecrement}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
